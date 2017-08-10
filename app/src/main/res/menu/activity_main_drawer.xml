@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:id="@+id/nav_first_option"
+        android:textColor="@color/secondary_color" />
+
+    <item android:title="Login"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:textColor="@color/secondary_color"
+        android:id="@+id/nav_login"
+        />
+
+    <item android:title="About Us"
+
+        android:icon="@drawable/ic_home_black_24dp"
+        android:id="@+id/nav_Second_option"
+        android:textColor="@color/secondary_color" />
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:title="Rate us on Playstore"
+                android:icon="@drawable/ic_home_black_24dp"
+                android:id="@+id/nav_Third_option" />
+            <item
+                android:title="Buy Ad-free Version"
+
+                android:icon="@drawable/ic_home_black_24dp"
+                android:id="@+id/nav_fourth_option" />
+        </menu>
+    </item>
+
+    <group
+        android:id="@+id/group_settings_id">
+
+        <item android:title="Request a Story"
+            android:icon="@drawable/ic_home_black_24dp"
+
+            android:id="@+id/nav_fifth_option"/>
+
+        <item android:title="Submit your Story"
+            android:icon="@drawable/ic_home_black_24dp"
+
+            android:id="@+id/nav_Sixth_option"/>
+
+    </group>
+
+
+</menu>
