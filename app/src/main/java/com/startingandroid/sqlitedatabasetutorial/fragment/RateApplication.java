@@ -9,24 +9,20 @@ import android.view.ViewGroup;
 
 import com.startingandroid.sqlitedatabasetutorial.R;
 
-/**
- * Created by admin on 1/11/2017.
- */
-
-
-public class second_fragment extends Fragment {
+public class RateApplication extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_second_option,null);
+        return inflater.inflate(R.layout.rate_application,null);
     }
 
     @Override
     public void onViewCreated (View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("About Us");
+        getActivity().setTitle("Rate Us On Playstore");
+
     }
 
 }

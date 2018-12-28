@@ -8,8 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.startingandroid.sqlitedatabasetutorial.MainActivity;
-import com.startingandroid.sqlitedatabasetutorial.VO.Book;
+import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 
 import java.io.File;
 import java.io.FileOutputStream;

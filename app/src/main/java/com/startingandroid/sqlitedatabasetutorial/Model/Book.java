@@ -1,4 +1,4 @@
-package com.startingandroid.sqlitedatabasetutorial.VO;
+package com.startingandroid.sqlitedatabasetutorial.Model;
 
 import java.io.Serializable;
 

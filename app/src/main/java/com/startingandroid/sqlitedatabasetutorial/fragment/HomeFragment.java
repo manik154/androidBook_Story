@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.startingandroid.sqlitedatabasetutorial.FirstActivity;
+import com.startingandroid.sqlitedatabasetutorial.Activity.FirstActivity;
 import com.startingandroid.sqlitedatabasetutorial.R;
-import com.startingandroid.sqlitedatabasetutorial.RecyclerTouchListener;
-import com.startingandroid.sqlitedatabasetutorial.VO.Book;
+import com.startingandroid.sqlitedatabasetutorial.Util.RecyclerTouchListener;
+import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 import com.startingandroid.sqlitedatabasetutorial.adapters.BookAdapter;
 import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 
@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by admin on 1/11/2017.
  */
 
-public class RecyclerviewFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
         private static final String TAG = "RecyclerViewFragment";
         private RecyclerView recyclerView;
@@ -40,7 +40,7 @@ public class RecyclerviewFragment extends Fragment {
         container, @Nullable Bundle savedInstanceState){
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
-        View rootView = inflater.inflate(R.layout.recyclerview_fragment,container, false);
+        View rootView = inflater.inflate(R.layout.home_fragment,container, false);
         rootView.setTag(TAG);
        recyclerView = (RecyclerView) rootView.findViewById(R.id.usersList);
         recyclerView.setHasFixedSize(true);

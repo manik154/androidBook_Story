@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.startingandroid.sqlitedatabasetutorial.R;
-import com.startingandroid.sqlitedatabasetutorial.VO.Book;
+import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 
 import java.util.ArrayList;
 

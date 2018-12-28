@@ -1,4 +1,4 @@
-package com.startingandroid.sqlitedatabasetutorial;
+package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -22,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.startingandroid.sqlitedatabasetutorial.fragment.Login_fragment;
-import com.startingandroid.sqlitedatabasetutorial.fragment.RecyclerviewFragment;
-import com.startingandroid.sqlitedatabasetutorial.fragment.second_fragment;
-import com.startingandroid.sqlitedatabasetutorial.fragment.sixth_option;
-import com.startingandroid.sqlitedatabasetutorial.fragment.third_option;
-import com.startingandroid.sqlitedatabasetutorial.fragment.fifth_option;
-import com.startingandroid.sqlitedatabasetutorial.fragment.fourth_option;
+import com.startingandroid.sqlitedatabasetutorial.R;
+import com.startingandroid.sqlitedatabasetutorial.fragment.LoginFragment;
+import com.startingandroid.sqlitedatabasetutorial.fragment.HomeFragment;
+import com.startingandroid.sqlitedatabasetutorial.fragment.AboutUs;
+import com.startingandroid.sqlitedatabasetutorial.fragment.SubmitStory;
+import com.startingandroid.sqlitedatabasetutorial.fragment.RequestStory;
+import com.startingandroid.sqlitedatabasetutorial.fragment.BuyAdFreeVersion;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,73 +49,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        imageView=(ImageView)findViewById( R.id.image2);
+        imageView = (ImageView) findViewById(R.id.image2);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.shitstuff) ;
+        mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
         mNavigationView.setItemTextColor(ColorStateList.valueOf(Color.BLUE));
 
 
         mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction mFragmentTransaction= mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.content_frame,new RecyclerviewFragment()).commit();
-
-
-
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.content_frame, new HomeFragment()).commit();
 
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem)
-            {
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
 
+                if (menuItem.getItemId() == R.id.home) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, new HomeFragment()).commit();
 
-                if (menuItem.getItemId() == R.id.nav_Second_option)
-                {
+                }
+
+                if (menuItem.getItemId() == R.id.nav_login) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, new LoginFragment()).commit();
+
+                }
+
+                if (menuItem.getItemId() == R.id.about_us) {
 
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame,new second_fragment()).commit();
-
-                }
-                if (menuItem.getItemId() == R.id.nav_login)
-                {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame,new Login_fragment()).commit();
-
-                }
-                if (menuItem.getItemId() == R.id.nav_first_option)
-                {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame,new RecyclerviewFragment()).commit();
+                    fragmentTransaction.replace(R.id.content_frame, new AboutUs()).commit();
 
                 }
 
-
-               /*if (menuItem.getItemId() == R.id.nav_item_inbox) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.,new TabFragment()).commit();
-                }*/
-
-                if (menuItem.getItemId() == R.id.nav_fourth_option) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame,new fourth_option()).commit();
-                }
-                if (menuItem.getItemId() == R.id.nav_fifth_option) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame,new fifth_option()).commit();
-                }
-                if (menuItem.getItemId() == R.id.nav_Sixth_option) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame,new sixth_option()).commit();
-                }
-
-                if (menuItem.getItemId() == R.id.nav_Third_option) {
+                if (menuItem.getItemId() == R.id.rate_application) {
                     //ragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                   // fragmentTransaction.replace(R.id.content_frame,new third_option()).commit();
+                    // fragmentTransaction.replace(R.id.content_frame,new RateApplication()).commit();
 
                     Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
                     Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
@@ -132,6 +107,24 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
+               /*if (menuItem.getItemId() == R.id.nav_item_inbox) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.,new TabFragment()).commit();
+                }*/
+
+                if (menuItem.getItemId() == R.id.buy_ad_free) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.content_frame, new BuyAdFreeVersion()).commit();
+                }
+                if (menuItem.getItemId() == R.id.request_a_story) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.content_frame, new RequestStory()).commit();
+                }
+                if (menuItem.getItemId() == R.id.submit_a_story) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.content_frame, new SubmitStory()).commit();
+                }
+
 
                 return false;
             }
@@ -145,14 +138,14 @@ public class MainActivity extends AppCompatActivity {
         imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
         imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
 
-        // load nav menu header data
+        // load nav menu_share header data
 
 
         /**
          * Setup Drawer Toggle of the Toolbar
          */
 
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name,
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
                 R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
@@ -168,22 +161,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menuss,menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.menu_bookmark:
-                // Single menu item is selected do something
+                // Single menu_share item is selected do something
                 // Ex: launching new activity/screen or show alert message
                 Toast.makeText(MainActivity.this, "Bookmark is Selected", Toast.LENGTH_SHORT).show();
                 return true;

@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import com.startingandroid.sqlitedatabasetutorial.R;
 
 public class
-sixth_option extends Fragment {
+SubmitStory extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_sixth_option,null);
+        return inflater.inflate(R.layout.submit_story,null);
     }
     @Override
     public void onViewCreated (View view, @Nullable Bundle savedInstanceState){

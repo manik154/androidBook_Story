@@ -1,4 +1,4 @@
-package com.startingandroid.sqlitedatabasetutorial;
+package com.startingandroid.sqlitedatabasetutorial.Util;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

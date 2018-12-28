@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import com.startingandroid.sqlitedatabasetutorial.R;
 
-public class fourth_option extends Fragment {
+public class BuyAdFreeVersion extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_fourth_option,null);
+        return inflater.inflate(R.layout.but_ad_free,null);
     }
 
     @Override

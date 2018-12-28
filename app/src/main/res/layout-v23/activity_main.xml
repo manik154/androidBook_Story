@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="com.startingandroid.sqlitedatabasetutorial.MainActivity"
+    tools:context="com.startingandroid.sqlitedatabasetutorial.Activity.MainActivity"
     android:orientation="horizontal">
 
 
@@ -43,7 +43,7 @@
             android:layout_gravity="start"
             android:id="@+id/shitstuff"
             app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/activity_main_drawer"
+            app:menu="@menu/navigation_drawer_menu"
             android:layout_marginTop="-24dp"/>
 
     </android.support.v4.widget.DrawerLayout>

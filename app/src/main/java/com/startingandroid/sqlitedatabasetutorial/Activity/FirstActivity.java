@@ -1,5 +1,5 @@
 
-package com.startingandroid.sqlitedatabasetutorial;
+package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -20,7 +20,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.startingandroid.sqlitedatabasetutorial.VO.Book;
+import com.startingandroid.sqlitedatabasetutorial.Model.Book;
+import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 
 public class FirstActivity extends AppCompatActivity
@@ -45,7 +46,7 @@ public class FirstActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(R.layout.book_detail_activity);
         dbHelper = new GetBookDatabase(getApplicationContext());
         Intent intent = getIntent();
         toolbar_title = (TextView) findViewById(R.id.toolbar_title);
@@ -167,7 +168,7 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
             @Override
             public void onClick(View v) {
                 if (v == button_menu) {
-                    Toast.makeText(FirstActivity.this, "menu", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FirstActivity.this, "menu_share", Toast.LENGTH_LONG).show();
                     Intent intent;
                     intent = new Intent(FirstActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -179,7 +180,7 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menu_share,menu);
         return true;
     }
 
@@ -190,7 +191,7 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
         switch (item.getItemId())
         {
             /*case R.id.menu_bookmark:
-                // Single menu item is selected do something
+                // Single menu_share item is selected do something
                 // Ex: launching new activity/screen or show alert message
                 Toast.makeText(FirstActivity.this, "Bookmark is Selected", Toast.LENGTH_SHORT).show();
                 return true;

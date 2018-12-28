@@ -1,4 +1,4 @@
-package com.startingandroid.sqlitedatabasetutorial;
+package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.startingandroid.sqlitedatabasetutorial.R;
 
 /**
  * Created by admin on 1/13/2017.

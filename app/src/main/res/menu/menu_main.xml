@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <!-- Single menuss item
+    <!-- Single menu_main item
         xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-         Set id, icon and Title for each menuss item
+         Set id, icon and Title for each menu_main item
     -->
 
     <item android:id="@+id/menu_bookmark"

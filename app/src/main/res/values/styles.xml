@@ -7,11 +7,5 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
-
-    <style name="Color1SwitchStyle">
-        <item name="colorControlActivated">@color/colorAccent</item>
-    </style>
-
-
-
+    
 </resources>

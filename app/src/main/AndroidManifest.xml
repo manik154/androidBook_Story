@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="com.startingandroid.sqlitedatabasetutorial.MainActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name="com.startingandroid.sqlitedatabasetutorial.SplashActivity">
+            android:name="com.startingandroid.sqlitedatabasetutorial.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,8 +28,8 @@
         </activity>
 
 
-        <activity android:name="com.startingandroid.sqlitedatabasetutorial.FirstActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name="com.startingandroid.sqlitedatabasetutorial.Activity.FirstActivity"
+            android:parentActivityName=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

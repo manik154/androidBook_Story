@@ -3,7 +3,7 @@
 
     <item android:title="Home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:id="@+id/nav_first_option"
+        android:id="@+id/home"
         android:textColor="@color/secondary_color" />
 
     <item android:title="Login"
@@ -15,7 +15,7 @@
     <item android:title="About Us"
 
         android:icon="@drawable/ic_home_black_24dp"
-        android:id="@+id/nav_Second_option"
+        android:id="@+id/about_us"
         android:textColor="@color/secondary_color" />
 
     <item android:title="Others">
@@ -23,12 +23,12 @@
             <item
                 android:title="Rate us on Playstore"
                 android:icon="@drawable/ic_home_black_24dp"
-                android:id="@+id/nav_Third_option" />
+                android:id="@+id/rate_application" />
             <item
                 android:title="Buy Ad-free Version"
 
                 android:icon="@drawable/ic_home_black_24dp"
-                android:id="@+id/nav_fourth_option" />
+                android:id="@+id/buy_ad_free" />
         </menu>
     </item>
 
@@ -38,12 +38,12 @@
         <item android:title="Request a Story"
             android:icon="@drawable/ic_home_black_24dp"
 
-            android:id="@+id/nav_fifth_option"/>
+            android:id="@+id/request_a_story"/>
 
         <item android:title="Submit your Story"
             android:icon="@drawable/ic_home_black_24dp"
 
-            android:id="@+id/nav_Sixth_option"/>
+            android:id="@+id/submit_a_story"/>
 
     </group>
 
