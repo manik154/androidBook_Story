@@ -41,8 +41,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.UserViewHolder
         // holder.icon_entry.setText(mDataSet.get(position).getNumber());
         if (mDataSet.get(position).getIcon() != null)
         {
-            Resou
-            rces resources = context.getResources();
+            Resources resources = context.getResources();
             final int resourceId = resources.getIdentifier(mDataSet.get(position).getIcon(), "drawable",
                     context.getPackageName());
             holder.icon_entry.setImageResource(resourceId);
