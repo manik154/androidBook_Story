@@ -1,170 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context="com.startingandroid.sqlitedatabasetutorial.Activity.FirstActivity">
-
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/MyAppbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:maxLines="2"
-            android:minHeight="60dp">
-
-            <RelativeLayout
-                android:id="@+id/relativelayout_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textSize="24sp" />
-
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.Toolbar>
-
-
-    </android.support.design.widget.AppBarLayout>
-
-    <ScrollView
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/MyAppbar">
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <RelativeLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <RelativeLayout
-                android:id="@+id/image_book_relativelayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/direction_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardElevation="10dp"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/text_title"
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center_horizontal"
-                   android:textColor="@color/cardview_color"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/relativelayout34"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_title">
-
-                    <ImageView
-                        android:id="@+id/imageview"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="2.5dp"
-                        android:gravity="center_horizontal" />
-                </RelativeLayout>
-
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_compat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/relativelayout34"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="300dp"
-                    android:checked="false"
-                    android:textColor="@color/number"
-                    android:textOff="D"
-                    android:textOn="N"
-                    android:textSize="20sp"
-                    app:showText="true" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativelayout_545"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/image_book_relativelayout">
+                    android:background="#FFFFFF"
+                    android:minHeight="40dp"
+                    android:padding="8sp"
+                    android:fontFamily="@font/lato_bold_italic"
+                    android:text="Title"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/content"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="8sp"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/lato_black_italic"
+                    android:text="content"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
 
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativelayout_545"
-                android:layout_marginBottom="25dp">
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:background="@null"
-                    android:text="prev"
-                    android:textColor="#000000" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativelayout_545">
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:background="@null"
-                    android:text="next"
-                    android:textColor="#000000" />
-            </RelativeLayout>
-        </RelativeLayout>
-    </ScrollView>
-
-    <TextView
-        android:id="@+id/textview_adsense"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:text="pepsi ad"
-        android:background="@color/secondary_color"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/abc_search_url_text_selected"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/button_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:text="prev"
+            android:textColor="#000000" />
+
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:text="next"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/night_icon"
+        app:elevation="6dp"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:pressedTranslationZ="12dp" />
+</android.support.design.widget.CoordinatorLayout>

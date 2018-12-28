@@ -3,6 +3,10 @@ package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -22,26 +26,30 @@ import android.widget.Toast;
 
 import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 import com.startingandroid.sqlitedatabasetutorial.R;
+import com.startingandroid.sqlitedatabasetutorial.Util.AppBarStateChangeListener;
 import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 
 public class FirstActivity extends AppCompatActivity
 
 {
     private Button button_prev, button_menu, button_next;
-    private ImageView imageView;
+    //    private ImageView imageView;
     private TextView txtView;
-
-    Book currentBook;
-    Toolbar toolbar;
+    private FloatingActionButton floatingActionButton;
+    private Book currentBook;
+    private Toolbar toolbar;
     private int e;
+    private NestedScrollView nestedScrollView;
     private static final String SELECT_SQL = "SELECT *  FROM user";
-    private RelativeLayout relativelayout;
+    // private RelativeLayout relativelayout;
     private int f = 1;
     GetBookDatabase dbHelper;
     private Context context = FirstActivity.this;
-    TextView content,toolbar_title;
-    private ScrollView scrollView;
-
+    TextView content;
+    //TextView toolbar_title;
+    private AppBarLayout appBarLayout;
+    private String getName;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,39 +57,80 @@ public class FirstActivity extends AppCompatActivity
         setContentView(R.layout.book_detail_activity);
         dbHelper = new GetBookDatabase(getApplicationContext());
         Intent intent = getIntent();
-        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
+        //   toolbar_title = (TextView) findViewById(R.id.toolbar);
         content = (TextView) findViewById(R.id.content);
+        nestedScrollView = findViewById(R.id.scroll);
+        floatingActionButton = findViewById(R.id.fab);
 //        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Roboto.ttf");
-  //      content.setTypeface(custom_font);
-        txtView= (TextView) findViewById(R.id.text_title);
-        relativelayout=(RelativeLayout)findViewById(R.id.relativelayout);
-scrollView=(ScrollView) findViewById(R.id.scrollView);
-        SwitchCompat switchCompat = (SwitchCompat) findViewById(R.id.switch_compat);
-        toolbar=(Toolbar)findViewById(R.id.toolbar2);
+        //      content.setTypeface(custom_font);
+        txtView = (TextView) findViewById(R.id.title);
+        //      relativelayout=(RelativeLayout)findViewById(R.id.relativelayout);
+        //  SwitchCompat switchCompat = (SwitchCompat) findViewById(R.id.switch_compat);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.app_bar_layout);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        imageView = (ImageView) findViewById(R.id.imageview);
+        //  imageView = (ImageView) findViewById(R.id.imageview);
         currentBook = (Book) intent.getSerializableExtra("currentBook");
 
-        if (currentBook != null) {
-            String getName = (String) currentBook.getName();
 
-            //txtView.setText(getName);
-            getSupportActionBar().setTitle(getName);
+        if (currentBook != null) {
+            getName = (String) currentBook.getName();
+
             txtView.setText(getName);
-            toolbar_title.setTextColor(0xffffffff);
             content.setText(currentBook.getContent());
 
-           Resources resources = context.getResources();
+           /*Resources resources = context.getResources();
             final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
                     context.getPackageName());
             imageView.setImageResource(resourceId);
-
+*/
 
         }
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle(getName);
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    isShow = false;
+                }
+            }
+        });
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+
+
+                if ((state.name()).equals("COLLAPSED")) {
+                    floatingActionButton.hide();
+                    //  item.setVisible(true);
+
+                } else {
+                    try {
+                        //  item.setVisible(false);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+
+            }
+        });
         OnButtonClickListener();
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 if (bChecked)
@@ -109,11 +158,12 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
                 }
             }
         });
+        */
     }
 
     public void OnButtonClickListener() {
-      button_prev = (Button) findViewById(R.id.button);
-        button_next = (Button) findViewById(R.id.button2);
+        button_prev = (Button) findViewById(R.id.button_prev);
+        button_next = (Button) findViewById(R.id.button_next);
         //button_menu = (Button) findViewById(R.id.button3);
 
 
@@ -121,6 +171,7 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
             @Override
             public void onClick(View v) {
                 button_next.setEnabled(true);
+                nestedScrollView.fullScroll(NestedScrollView.FOCUS_UP);
                 Book book = dbHelper.getPreviousBook(currentBook.getId());
                 if (book != null) {
                     currentBook = book;
@@ -129,14 +180,15 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
                     txtView.setText(getName);
                     getSupportActionBar().setTitle(getName);
                     content.setText(currentBook.getContent());
-                    Resources resources = context.getResources();
+                   /* Resources resources = context.getResources();
                    final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
                             context.getPackageName());
-                    imageView.setImageResource(resourceId);
+                            */
+                  /*  imageView.setImageResource(resourceId);
                     scrollView.fullScroll(ScrollView.FOCUS_UP);
-
-                }else{
-                    Toast.makeText(context,"No more chapters",Toast.LENGTH_LONG).show();
+*/
+                } else {
+                    Toast.makeText(context, "No more chapters", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -144,58 +196,42 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                nestedScrollView.fullScroll(NestedScrollView.FOCUS_UP);
                 //button_prev.setEnabled(true);
                 Book book = dbHelper.getNextBook(currentBook.getId());
                 if (book != null) {
                     currentBook = book;
-                    String getName = (String)currentBook.getName();
+                    String getName = (String) currentBook.getName();
                     getSupportActionBar().setTitle(getName);
                     txtView.setText(getName);
                     content.setText(currentBook.getContent());
-                    Resources resources = context.getResources();
+                /*    Resources resources = context.getResources();
                     final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
                             context.getPackageName());
                     imageView.setImageResource(resourceId);
-                    scrollView.fullScroll(ScrollView.FOCUS_UP);
+                    scrollView.fullScroll(ScrollView.FOCUS_UP);*/
 
-                }else{
-                    Toast.makeText(context,"Reached End of Book",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Reached End of Book", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        /*
-        button_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v == button_menu) {
-                    Toast.makeText(FirstActivity.this, "menu_share", Toast.LENGTH_LONG).show();
-                    Intent intent;
-                    intent = new Intent(FirstActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });*/
+
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_share,menu);
+        menuInflater.inflate(R.menu.menu_share, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
-            /*case R.id.menu_bookmark:
-                // Single menu_share item is selected do something
-                // Ex: launching new activity/screen or show alert message
-                Toast.makeText(FirstActivity.this, "Bookmark is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-*/
+        switch (item.getItemId()) {
+
             case R.id.menu_share:
                 Toast.makeText(FirstActivity.this, "Share is Selected", Toast.LENGTH_SHORT).show();
 
@@ -204,23 +240,13 @@ scrollView=(ScrollView) findViewById(R.id.scrollView);
                 String shareBody = "http://play.google.com/store/apps/details?id=";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(sharingIntent,"Share via"));
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
                 return true;
-
-         /*   case R.id.menu_delete:
-                Toast.makeText(FirstActivity.this, "Delete is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.menu_preferences:
-                Toast.makeText(FirstActivity.this, "Preferences is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-*/
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
 }

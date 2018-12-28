@@ -1,33 +1,14 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Glimray Stories"
-        android:textAlignment="center"
-        android:textColor="#FF0000"
-        android:id="@+id/text_glimray_stories"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+    android:background="@color/cardview_dark_background" >
 
     <ImageView
+        android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/images"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="172dp" />
-
+        android:layout_centerInParent="true"
+        android:src="@drawable/book" />
 
 </RelativeLayout>
-

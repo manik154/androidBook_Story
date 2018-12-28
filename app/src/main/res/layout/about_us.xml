@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/book" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/lato_italic"
+            android:text="Love the internet as a global public resource, open and accessible to all? As a not-for-profit, the Mozilla Foundation needs your help to defend this place where love, creativity and innovation flourish with programs like our fight to save Net Neutrality. Will you chip in?"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+    </RelativeLayout>
 </LinearLayout>

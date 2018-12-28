@@ -2,6 +2,7 @@ package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -113,16 +115,20 @@ public class MainActivity extends AppCompatActivity {
                 }*/
 
                 if (menuItem.getItemId() == R.id.buy_ad_free) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame, new BuyAdFreeVersion()).commit();
+                    /*FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.content_frame, new BuyAdFreeVersion()).commit();*/
+                    simpleAlert();
                 }
-                if (menuItem.getItemId() == R.id.request_a_story) {
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame, new RequestStory()).commit();
-                }
+
                 if (menuItem.getItemId() == R.id.submit_a_story) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.content_frame, new SubmitStory()).commit();
+                }
+
+                if (menuItem.getItemId() == R.id.request_a_story) {
+                    simpleAlert();
+                    /*FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.content_frame, new RequestStory()).commit();*/
                 }
 
 
@@ -154,6 +160,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void simpleAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Simple Alert");
+        builder.setMessage("We have a message");
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.setCancelable(false);
+        builder.show();
+    }
+
     private void loadNavHeader() {
         // name, website
         txtName.setText("Story Teller");
@@ -161,45 +181,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.menu_bookmark:
-                // Single menu_share item is selected do something
-                // Ex: launching new activity/screen or show alert message
-                Toast.makeText(MainActivity.this, "Bookmark is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-/*
-            case R.id.menu_save:
-                Toast.makeText(MainActivity.this, "Save is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.menu_search:
-                Toast.makeText(MainActivity.this, "Search is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.menu_share:
-                Toast.makeText(MainActivity.this, "Share is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-          /*  case R.id.menu_delete:
-                Toast.makeText(MainActivity.this, "Delete is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-*/
-            case R.id.menu_preferences:
-                Toast.makeText(MainActivity.this, "Preferences is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

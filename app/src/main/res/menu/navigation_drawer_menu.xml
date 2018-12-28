@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
-        android:icon="@drawable/ic_home_black_24dp"
+    <item
         android:id="@+id/home"
-        android:textColor="@color/secondary_color" />
-
-    <item android:title="Login"
         android:icon="@drawable/ic_home_black_24dp"
         android:textColor="@color/secondary_color"
-        android:id="@+id/nav_login"
-        />
+        android:title="Home" />
 
-    <item android:title="About Us"
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:textColor="@color/secondary_color"
+        android:title="Login" />
+
+    <item
+        android:id="@+id/about_us"
 
         android:icon="@drawable/ic_home_black_24dp"
-        android:id="@+id/about_us"
-        android:textColor="@color/secondary_color" />
+        android:textColor="@color/secondary_color"
+        android:title="About Us" />
+
+    <group android:id="@+id/group_settings_id">
+
+        <item
+            android:id="@+id/submit_a_story"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Submit your Story" />
+
+        <item
+            android:id="@+id/request_a_story"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Request a Story" />
+
+    </group>
 
     <item android:title="Others">
         <menu>
             <item
-                android:title="Rate us on Playstore"
+                android:id="@+id/rate_application"
                 android:icon="@drawable/ic_home_black_24dp"
-                android:id="@+id/rate_application" />
+                android:title="Rate us on Playstore" />
             <item
-                android:title="Buy Ad-free Version"
-
+                android:id="@+id/buy_ad_free"
                 android:icon="@drawable/ic_home_black_24dp"
-                android:id="@+id/buy_ad_free" />
+                android:title="Buy Ad-free Version" />
         </menu>
     </item>
-
-    <group
-        android:id="@+id/group_settings_id">
-
-        <item android:title="Request a Story"
-            android:icon="@drawable/ic_home_black_24dp"
-
-            android:id="@+id/request_a_story"/>
-
-        <item android:title="Submit your Story"
-            android:icon="@drawable/ic_home_black_24dp"
-
-            android:id="@+id/submit_a_story"/>
-
-    </group>
 
 
 </menu>

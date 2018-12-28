@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Single menu_main item
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,15 +9,19 @@
 
          Set id, icon and Title for each menu_main item
     -->
+    <item
+        android:id="@+id/scrollTop"
+        android:title="Scroll to top" />
+    <item
+        android:id="@+id/refreshPage"
+        android:title="Refresh" />
+    <item
+        android:id="@+id/AboutApplication"
+        android:title="About Application" />
 
-    <item android:id="@+id/menu_bookmark"
-
+    <item
+        android:id="@+id/menu_bookmark"
         android:icon="@drawable/bookmark"
         android:title="Bookmark"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/menu_preferences"
-        android:icon="@mipmap/ic_launcher"
-        app:showAsAction="never"
-        android:title="Preferences" />
+        app:showAsAction="always" />
 </menu>

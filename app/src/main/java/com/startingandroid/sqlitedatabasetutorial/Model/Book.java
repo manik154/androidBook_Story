@@ -2,24 +2,24 @@ package com.startingandroid.sqlitedatabasetutorial.Model;
 
 import java.io.Serializable;
 
-public class Book implements Serializable
-{
+public class Book implements Serializable {
     private int id;
-    private String name, email, content, year, number,icon;
+    private String name, email, content, year, number, icon;
 
-    public Book(int id,String name,String content,String icon) {
-        this.id=id;
+    public Book(int id, String name, String content, String icon) {
+        this.id = id;
         this.name = name;
         this.content = content;
-    this.icon=icon;
+        this.icon = icon;
     }
 
     public Book(int id) {
         this.id = id;
         this.name = name;
         this.content = content;
-   this.icon=icon;
+        this.icon = icon;
     }
+
     public int getId() {
         return id;
     }
@@ -67,7 +67,7 @@ public class Book implements Serializable
     }
 
     public void setIcon(String icon) {
-        this.icon =icon;
+        this.icon = icon;
     }
 
     public String getNumber() {

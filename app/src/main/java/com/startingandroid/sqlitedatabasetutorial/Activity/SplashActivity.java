@@ -2,6 +2,7 @@ package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -9,45 +10,24 @@ import android.widget.ImageView;
 
 import com.startingandroid.sqlitedatabasetutorial.R;
 
-/**
- * Created by admin on 1/13/2017.
- */
 
 public class SplashActivity extends AppCompatActivity {
+
+    private int SPLASH_SCREEN_TIMEOUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
 
-        final ImageView imageView=(ImageView)findViewById(R.id.imageView);
-        final Animation animation= AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
-        final Animation animation2= AnimationUtils.loadAnimation(getBaseContext(),R.anim.abc_fade_out);
-        imageView.startAnimation(animation);
-        animation.setAnimationListener(new Animation.AnimationListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation)
-            {
-                imageView.startAnimation(animation2);
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
-                Intent i=new Intent(SplashActivity.this,MainActivity.class);
-                startActivity(i);
-
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-
-
+        }, SPLASH_SCREEN_TIMEOUT);
 
     }
 }
