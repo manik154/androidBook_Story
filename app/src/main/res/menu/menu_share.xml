@@ -8,6 +8,10 @@
         android:icon="@drawable/share"
         android:title="Share"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/night"
+        android:icon="@drawable/night_icon"
+        android:title=""
+        app:showAsAction="always"/>
 
 </menu>

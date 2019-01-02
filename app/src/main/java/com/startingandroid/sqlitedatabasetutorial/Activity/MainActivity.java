@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,23 +15,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.fragment.LoginFragment;
 import com.startingandroid.sqlitedatabasetutorial.fragment.HomeFragment;
 import com.startingandroid.sqlitedatabasetutorial.fragment.AboutUs;
 import com.startingandroid.sqlitedatabasetutorial.fragment.SubmitStory;
-import com.startingandroid.sqlitedatabasetutorial.fragment.RequestStory;
-import com.startingandroid.sqlitedatabasetutorial.fragment.BuyAdFreeVersion;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -117,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.buy_ad_free) {
                     /*FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.content_frame, new BuyAdFreeVersion()).commit();*/
-                    simpleAlert();
+                    //simpleAlert();
+                    Toast.makeText(context, "Coming Soon", Toast.LENGTH_SHORT).show();
                 }
 
                 if (menuItem.getItemId() == R.id.submit_a_story) {
@@ -126,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (menuItem.getItemId() == R.id.request_a_story) {
-                    simpleAlert();
+                    //simpleAlert();
+                    Toast.makeText(context, "Coming Soon", Toast.LENGTH_SHORT).show();
                     /*FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.content_frame, new RequestStory()).commit();*/
                 }
@@ -160,10 +159,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void simpleAlert() {
+    /*public void simpleAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Simple Alert");
-        builder.setMessage("We have a message");
+        builder.setMessage("");
         builder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 });
         builder.setCancelable(false);
         builder.show();
-    }
+    }*/
 
     private void loadNavHeader() {
         // name, website

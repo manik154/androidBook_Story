@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/image"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/lato_italic"
+            android:fontFamily="@font/merriweather_bold_italic"
             android:text="Love the internet as a global public resource, open and accessible to all? As a not-for-profit, the Mozilla Foundation needs your help to defend this place where love, creativity and innovation flourish with programs like our fight to save Net Neutrality. Will you chip in?"
             android:textAlignment="center"
             android:textSize="16sp" />

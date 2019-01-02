@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
     private int id;
-    private String name, email, content, year, number, icon;
+    private String name, content, number, icon;
 
     public Book(int id, String name, String content, String icon) {
         this.id = id;
@@ -37,15 +37,6 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
     public String getContent() {
         return content;
     }
@@ -54,13 +45,6 @@ public class Book implements Serializable {
         this.content = content;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
 
     public String getIcon() {
         return icon;

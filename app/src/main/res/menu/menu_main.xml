@@ -11,12 +11,15 @@
     -->
     <item
         android:id="@+id/scrollTop"
+        android:textColor="@color/black_opacity_color"
         android:title="Scroll to top" />
     <item
         android:id="@+id/refreshPage"
+        android:textColor="@color/black_opacity_color"
         android:title="Refresh" />
     <item
         android:id="@+id/AboutApplication"
+        android:textColor="@color/black_opacity_color"
         android:title="About Application" />
 
     <item

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffd32f2f</color>
-    <color name="colorPrimaryDark">#ffc62828</color>
-    <color name="colorAccent">#ffef5350</color>
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#6A1B9A</color>
+    <color name="colorAccent">#6A1B9A</color>
 
-    <color name="title">#222222</color>
     <color name="genre">#222222</color>
-    <color name="number">#999999</color>
-    <color name="book_content_color">#000000</color>
-    <color name="cardview_color">#212121</color>
-    <color name="textcolor">#ffffff</color>
-<color name="secondary_color">#757575</color>
-    <color name="recyclerview_color">#ffffff</color>
+    <color name="book_content_color">#E6000000</color>
+    <color name="black_opacity_color">#B3000000</color>
+
+    <color name="body_text_white">#FFFFFFFF</color>
+    <color name="BookBackgroundColor">#212121</color>
+    <color name="BookTitleName">#ffffff</color>
 
 </resources>

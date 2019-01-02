@@ -8,13 +8,15 @@
     tools:context="com.startingandroid.sqlitedatabasetutorial.Activity.MainActivity"
     android:orientation="horizontal">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:minHeight="60dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ActionBar.ThemeOverlay"
+        app:popupTheme="@style/ActionBar.PopupThemeOverlay"
+        app:titleTextAppearance="@style/ActionBar.TitleText"
         android:elevation="6dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
          />

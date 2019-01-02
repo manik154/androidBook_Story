@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 
@@ -36,15 +38,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
         holder.name_entry.setText(mDataSet.get(position).getName());
-        holder.email_entry.setText(mDataSet.get(position).getEmail());
-        holder.year_entry.setText(mDataSet.get(position).getYear());
         // holder.icon_entry.setText(mDataSet.get(position).getNumber());
-        if (mDataSet.get(position).getIcon() != null)
-        {
-            Resources resources = context.getResources();
+        if (mDataSet.get(position).getIcon() != null) {
+
+            int drawableResourceId = context.getResources().getIdentifier(mDataSet.get(position).getIcon(),
+                    "drawable", context.getPackageName());
+            Glide.with(context).load(drawableResourceId).into(holder.icon_entry);
+           /* Picasso.with(context).load(drawableResourceId).centerCrop()
+                    .resize(holder.icon_entry.getWidth(), 500)
+                    .into(holder.icon_entry);*/
+ /*           Resources resources = context.getResources();
             final int resourceId = resources.getIdentifier(mDataSet.get(position).getIcon(), "drawable",
                     context.getPackageName());
             holder.icon_entry.setImageResource(resourceId);
+ */
         }
 
 
@@ -57,17 +64,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView name_entry, email_entry,content;
-        TextView year_entry;
+        TextView name_entry, content;
         ImageView icon_entry;
+
         UserViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.user_layout);
             name_entry = (TextView) itemView.findViewById(R.id.name_entry);
-            year_entry = (TextView) itemView.findViewById(R.id.year);
-            email_entry = (TextView) itemView.findViewById(R.id.email_entry);
-            icon_entry=(ImageView)itemView.findViewById(R.id.image2);
-            // icon_entry = (TextView) itemView.findViewById(R.id.image2);
+            icon_entry = (ImageView) itemView.findViewById(R.id.image2);
         }
     }
 
