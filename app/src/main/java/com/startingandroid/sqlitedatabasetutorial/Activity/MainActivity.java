@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
-        mNavigationView.setItemTextColor(ColorStateList.valueOf(Color.BLUE));
 
 
         mFragmentManager = getSupportFragmentManager();

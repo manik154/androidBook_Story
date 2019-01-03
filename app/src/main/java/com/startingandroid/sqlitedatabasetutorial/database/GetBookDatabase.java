@@ -24,7 +24,7 @@ public class GetBookDatabase extends SQLiteOpenHelper {
     SQLiteDatabase sqLiteDatabase;
     Context context;
     private DatabaseContract databaseContract = new DatabaseContract();
-    private String TAG ="GetBookDatabase";
+    private String TAG = "GetBookDatabase";
 
     public GetBookDatabase(Context context) {
         super(context, DB_NAME, null, 1);
@@ -97,7 +97,8 @@ public class GetBookDatabase extends SQLiteOpenHelper {
     String book = " CREATE TABLE IF NOT EXISTS " + databaseContract.TABLE_USER + " ("
             + databaseContract.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + databaseContract.KEY_NAME + " TEXT ,"
-            + databaseContract.KEY_CONTENT + " TEXT ,"+databaseContract.KEY_ICON + " TEXT )";
+            + databaseContract.KEY_CONTENT + " TEXT ," + databaseContract.KEY_ICON +
+            " TEXT ," + databaseContract.KEY_BOOKMARK + " TEXT)";
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -106,17 +107,35 @@ public class GetBookDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-         }
-
-    /*addUser() will add a new Book to database*/
-    public void addUser(Book book) {
+    }
+    public int updateBookmark(Book book) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
+        values.put(databaseContract.KEY_ID, book.getId());
         values.put(databaseContract.KEY_NAME, book.getName());
         values.put(databaseContract.KEY_CONTENT, book.getContent());
         values.put(databaseContract.KEY_ICON, book.getIcon());
+        values.put(databaseContract.KEY_BOOKMARK, 1);
 
-        db.insert(databaseContract.TABLE_USER, null, values); //Insert query to store the record in the database
+        // updating record
+        return db.update(databaseContract.TABLE_USER, values,
+                databaseContract.KEY_ID + " = ?",
+                // update query to make changes to the existing record
+                new String[]{String.valueOf(book.getId())});
+
+    }
+    /*addUser() will add a new Book to database*/
+    public void addBookmark(Book book) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(databaseContract.KEY_NAME, book.getName());
+        values.put(databaseContract.KEY_CONTENT, book.getContent());
+        values.put(databaseContract.KEY_ICON, book.getIcon());
+        values.put(databaseContract.KEY_BOOKMARK, 1);
+
+        db.insert(databaseContract.TABLE_USER, null, values);//Insert query to store the record in the database
         db.close();
     }
 
@@ -125,16 +144,17 @@ public class GetBookDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Book book = null;
         Cursor cursor = db.query(databaseContract.TABLE_USER, new String[]{databaseContract.KEY_ID,
-                        databaseContract.KEY_NAME, databaseContract.KEY_CONTENT}, databaseContract.KEY_ID + "=?",
+                        databaseContract.KEY_NAME, databaseContract.KEY_CONTENT, databaseContract.KEY_BOOKMARK}, databaseContract.KEY_ID + "=?",
                 new String[]{String.valueOf(user_id)}, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
-            book = new Book(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
+            book = new Book(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
             cursor.close();
         }
         return book;
     }
+
     /*getAllUsers() will return the list of all users*/
     public ArrayList<Book> getAllUsers() {
         ArrayList<Book> usersList = new ArrayList<Book>();
@@ -146,12 +166,30 @@ public class GetBookDatabase extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Book book = new Book(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
+                Book book = new Book(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
                 usersList.add(book);
             } while (cursor.moveToNext());
         }
         cursor.close();
         return usersList;
+    }
+
+    public ArrayList<Book> getAllBookmarkedUsers() {
+        ArrayList<Book> bookmarkList = new ArrayList<Book>();
+        String selectQuery = "SELECT  * FROM " + databaseContract.TABLE_USER+" WHERE bookmark = 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Book book = new Book(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                bookmarkList.add(book);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return bookmarkList;
     }
 
     /*getUsersCount() will give the total number of records in the table*/
@@ -165,20 +203,7 @@ public class GetBookDatabase extends SQLiteOpenHelper {
     }
 
     /*updateUser() will be used to update the existing book record*/
-    public int updateUser(Book book) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(databaseContract.KEY_NAME, book.getName());
-        values.put(databaseContract.KEY_CONTENT, book.getContent());
-        values.put(databaseContract.KEY_ICON, book.getIcon());
-
-        // updating record
-        return db.update(databaseContract.TABLE_USER, values, databaseContract.KEY_ID + " = ?",
-                // update query to make changes to the existing record
-                new String[]{String.valueOf(book.getId())});
-
-    }
 
 
     /*deleteContact() to delete the record from the table*/
@@ -190,30 +215,16 @@ public class GetBookDatabase extends SQLiteOpenHelper {
 
     }
 
-    public void insertAllContent() {
-        /*addUser(new Book("No One Is Inferior", "Science And Fantasy"));
-        addUser(new Book("Real Power", "Science And Fantasy", "BCD", "2015", "2"));
-        addUser(new Book("Ducks Quacks,Eagles Soar", "Science And Fantasy", "CDE", "2015", "3"));
-        addUser(new Book("After Death", "Science And Fantasy", "DEF", "2015", "4"));
-        addUser(new Book("WaterMelons", "Science And Fantasy", "EFG", "2015", "5"));
-        addUser(new Book("Peace Of Mind", "Science And Fantasy", "GHI", "2015", "6"));
-        addUser(new Book("Date With A Woman", "Science And Fantasy", "IJK", "2015", "7"));
-        addUser(new Book("Images", "Science And Fantasy", "KLM", "2015", "8"));
-        addUser(new Book("Price Drops", "Science And Fantasy", "MNO", "2015", "9"));
-*/
-    }
-
-    public Book getNextBook(int id)
-    {
+    public Book getNextBook(int id) {
         String sql = "SELECT * FROM " + databaseContract.TABLE_USER + " WHERE " + databaseContract.KEY_ID + " = ("
-             + "SELECT MIN(" + databaseContract.KEY_ID + ") from " + databaseContract.TABLE_USER + " WHERE "
+                + "SELECT MIN(" + databaseContract.KEY_ID + ") from " + databaseContract.TABLE_USER + " WHERE "
                 + databaseContract.KEY_ID + "> " + id + ")";
         SQLiteDatabase db = this.getWritableDatabase();
         Book book = null;
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                book = new Book(cursor.getInt(0),cursor.getString(1), cursor.getString(2),cursor.getString(3));
+                book = new Book(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
             } while (cursor.moveToNext());
         }
@@ -230,9 +241,9 @@ public class GetBookDatabase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                book = new Book(cursor.getInt(0),cursor.getString(1), cursor.getString(2),cursor.getString(3));
+                book = new Book(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return book;

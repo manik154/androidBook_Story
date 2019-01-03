@@ -11,5 +11,6 @@
     <color name="body_text_white">#FFFFFFFF</color>
     <color name="BookBackgroundColor">#212121</color>
     <color name="BookTitleName">#ffffff</color>
+    <color name="splash_background">#9999ff</color>
 
 </resources>

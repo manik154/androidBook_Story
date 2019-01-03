@@ -4,35 +4,29 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:textColor="@color/black_opacity_color"
         android:title="Home" />
 
     <item
         android:id="@+id/nav_login"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:textColor="@color/black_opacity_color"
+        android:icon="@drawable/login"
         android:title="Login" />
 
     <item
         android:id="@+id/about_us"
-
-        android:icon="@drawable/ic_home_black_24dp"
-        android:textColor="@color/black_opacity_color"
+        android:icon="@drawable/about_us"
         android:title="About Us" />
 
     <group android:id="@+id/group_settings_id">
 
         <item
             android:id="@+id/submit_a_story"
-            android:textColor="@color/black_opacity_color"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/submit_story_icon"
             android:title="Submit your Story" />
 
         <item
             android:id="@+id/request_a_story"
-            android:textColor="@color/black_opacity_color"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Request a Story" />
+            android:title="Request a Story"
+            android:icon="@drawable/request_icon"/>
 
     </group>
 
@@ -40,13 +34,9 @@
         <menu>
             <item
                 android:id="@+id/rate_application"
-                android:textColor="@color/black_opacity_color"
-                android:icon="@drawable/ic_home_black_24dp"
                 android:title="Rate us on Playstore" />
             <item
                 android:id="@+id/buy_ad_free"
-                android:textColor="@color/black_opacity_color"
-                android:icon="@drawable/ic_home_black_24dp"
                 android:title="Buy Ad-free Version" />
         </menu>
     </item>

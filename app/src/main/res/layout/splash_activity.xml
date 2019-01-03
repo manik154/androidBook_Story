@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background" >
+    android:background="@color/splash_background" >
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -10,5 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/book" />
+
+    <TextView
+        android:id="@+id/bounce"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:textColor="@color/book_content_color"
+        android:fontFamily="@font/merriweather_ultrabold_italic"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgLogo"
+        android:text="Story Teller" />
+
 
 </RelativeLayout>

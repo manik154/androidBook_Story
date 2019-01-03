@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,12 +34,13 @@ import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 public class FirstActivity extends AppCompatActivity
 
 {
-    private Button button_prev,  button_next;
+    private Button button_prev, button_next;
 
     private TextView txtView;
     private FloatingActionButton floatingActionButton;
     private Book currentBook;
     private Toolbar toolbar;
+    int c=0;
     private MenuItem item;
     private NestedScrollView nestedScrollView;
     private static final String SELECT_SQL = "SELECT *  FROM user";
@@ -52,8 +54,7 @@ public class FirstActivity extends AppCompatActivity
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
@@ -137,8 +138,7 @@ public class FirstActivity extends AppCompatActivity
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
             }
         });
@@ -205,28 +205,26 @@ public class FirstActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
 
-            case R.id.menu_share:
-                Toast.makeText(FirstActivity.this, "Share is Selected", Toast.LENGTH_SHORT).show();
+            case R.id.menu_bookmark:
 
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                String shareBody = "http://play.google.com/store/apps/details?id=";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
+                addBookmarkStory();
                 return true;
 
-          /*  if (item.getItemId() == R.id.similar) {
-                Intent intent = new Intent(MovieDetailActivity.this, SimilarMovieslist.class);
-                intent.putExtra("IdSimilar", id);
-                startActivity(intent);
-            }
-          */
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    private void updateBookmarkStory()
+    {
+        dbHelper.updateBookmark(currentBook);
+        Toast.makeText(context, "Adds", Toast.LENGTH_SHORT).show();
+    }
 
+    private void addBookmarkStory()
+    {
+        dbHelper.addBookmark(currentBook);
+        Toast.makeText(context, "Adds", Toast.LENGTH_SHORT).show();
+    }
 
 }

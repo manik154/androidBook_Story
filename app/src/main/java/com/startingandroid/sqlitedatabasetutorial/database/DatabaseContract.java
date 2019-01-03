@@ -10,6 +10,7 @@ public class DatabaseContract {
     public String KEY_ID = "id";
     public String KEY_NAME = "name";
     public String KEY_CONTENT = "content";
-    public String KEY_ICON = "icon";
+    public String KEY_ICON = "images";
+    public String KEY_BOOKMARK = "bookmark";
 
 }

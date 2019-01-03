@@ -27,7 +27,9 @@ android:layout_marginTop="70dp"
             android:layout_width="@dimen/profile_width"
             android:layout_height="@dimen/profile_height"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:src="@drawable/book"/>
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/profilepicture"/>
 
         <TextView
             android:id="@+id/name"

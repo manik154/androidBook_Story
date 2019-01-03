@@ -18,10 +18,8 @@
             android:layout_height="200dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:collapsedTitleTextAppearance="@style/ActionBar.TitleText"
-
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:theme="@style/ActionBar.ThemeOverlay"
             app:popupTheme="@style/ActionBar.PopupThemeOverlay" >

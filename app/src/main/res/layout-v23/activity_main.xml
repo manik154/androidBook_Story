@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.startingandroid.sqlitedatabasetutorial.Activity.MainActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context="com.startingandroid.sqlitedatabasetutorial.Activity.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ActionBar.ThemeOverlay"
-        app:popupTheme="@style/ActionBar.PopupThemeOverlay"
-        app:titleTextAppearance="@style/ActionBar.TitleText"
-        android:elevation="6dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        android:elevation="6dp"
         android:fitsSystemWindows="true"
-         />
-    <android.support.v4.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ActionBar.ThemeOverlay"
+        app:popupTheme="@style/ActionBar.PopupThemeOverlay"
+        app:titleTextAppearance="@style/ActionBar.TitleText" />
+
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
         android:id="@+id/drawerLayout"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/content_frame"
@@ -34,18 +31,17 @@
             android:layout_height="match_parent" />
 
 
-
-
-        <android.support.design.widget.NavigationView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/shitstuff"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:id="@+id/shitstuff"
+            app:itemTextColor="@color/colorPrimary"
+            android:layout_marginTop="-24dp"
             app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/navigation_drawer_menu"
-            android:layout_marginTop="-24dp"/>
+            app:itemIconTint="@color/colorAccent"
+            app:menu="@menu/navigation_drawer_menu" />
 
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

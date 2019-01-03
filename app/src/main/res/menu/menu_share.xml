@@ -4,14 +4,14 @@
 
 
     <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/share"
-        android:title="Share"
+        android:id="@+id/menu_bookmark"
+        android:icon="@drawable/bookmark"
+        android:title="Bookmark"
         app:showAsAction="always" />
     <item
         android:id="@+id/night"
         android:icon="@drawable/night_icon"
         android:title=""
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
 </menu>

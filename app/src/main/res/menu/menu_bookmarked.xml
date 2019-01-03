@@ -22,9 +22,4 @@
         android:textColor="@color/black_opacity_color"
         android:title="About Application" />
 
-    <item
-        android:id="@+id/menu_bookmark"
-        android:icon="@drawable/bookmark"
-        android:title="Bookmark"
-        app:showAsAction="always" />
 </menu>

@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 
 import com.startingandroid.sqlitedatabasetutorial.R;
 
-/**
- * Created by admin on 1/11/2017.
- */
 
 
 public class AboutUs extends Fragment {

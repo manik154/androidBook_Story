@@ -11,11 +11,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:fontFamily="@font/lato_italic"
+        android:elevation="6dp"
         android:fitsSystemWindows="true"
-        android:minHeight="60dp" />
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ActionBar.ThemeOverlay"
+        app:popupTheme="@style/ActionBar.PopupThemeOverlay"
+        app:titleTextAppearance="@style/ActionBar.TitleText" />
 
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,6 +40,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_marginTop="-24dp"
+            app:itemTextColor="@color/colorPrimary"
+            app:itemIconTint="@color/colorAccent"
+
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/navigation_drawer_menu" />
 

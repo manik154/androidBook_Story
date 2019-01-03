@@ -1,14 +1,13 @@
 package com.startingandroid.sqlitedatabasetutorial.fragment;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,8 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.startingandroid.sqlitedatabasetutorial.Activity.BookmarkActivity;
 import com.startingandroid.sqlitedatabasetutorial.Activity.FirstActivity;
-import com.startingandroid.sqlitedatabasetutorial.Activity.MainActivity;
 import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.Util.RecyclerTouchListener;
 import com.startingandroid.sqlitedatabasetutorial.Model.Book;
@@ -34,9 +33,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private BookAdapter adapter;
-
     private GetBookDatabase dbHandler;
     protected String[] mDataset;
+    private Book book;
 
     @Nullable
     @Override
@@ -71,10 +70,11 @@ public class HomeFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(),
+                recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Book book = books.get(position);
+                book = books.get(position);
                 Intent intent;
                 intent = new Intent(getActivity(), FirstActivity.class);
                 intent.putExtra("currentBook", book);
@@ -116,6 +116,10 @@ public class HomeFragment extends Fragment {
             case R.id.menu_bookmark:
                 // Single menu_share item is selected do something
                 // Ex: launching new activity/screen or show alert message
+                Intent intent = new Intent(getActivity(), BookmarkActivity.class);
+                intent.putExtra("currentBook", book);
+                startActivity(intent);
+
                 Toast.makeText(getActivity(), "Bookmark is Selected", Toast.LENGTH_SHORT).show();
                 return true;
 
@@ -124,15 +128,27 @@ public class HomeFragment extends Fragment {
                 return true;
 
             case R.id.AboutApplication:
-                Intent intent = new Intent(getActivity(), AboutUs.class);
-                startActivity(intent);
-                return true;
-/*
-            case R.id.menu_share:
-                Toast.makeText(MainActivity.this, "Share is Selected", Toast.LENGTH_SHORT).show();
+
+                FragmentManager mFragmentManager;
+                mFragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                mFragmentTransaction.replace(R.id.content_frame, new AboutUs()).commit();
                 return true;
 
-            case R.id.menu_delete:
+            case R.id.menu_share:
+
+                Toast.makeText(getActivity(), "Share is Selected", Toast.LENGTH_SHORT).show();
+
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "http://play.google.com/store/apps/details?id=";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+                return true;
+
+       /*     case R.id.menu_delete:
                 Toast.makeText(MainActivity.this, "Delete is Selected", Toast.LENGTH_SHORT).show();
                 return true;
 */
