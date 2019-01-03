@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/colorPrimaryDark"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ActionBar.ThemeOverlay"
+        app:popupTheme="@style/ActionBar.PopupThemeOverlay"
+        app:titleTextAppearance="@style/ActionBar.TitleText" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/toolbar"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/body_text_white">
+
+        <EditText
+            android:id="@+id/sme_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/body_text_white"
+            android:gravity="top"
+            android:hint="Write Your Stories Here and Send it"
+            android:lines="20"
+            android:padding="5dp" />
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/sme_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="submit"
+        android:minHeight="45dp"
+        android:textSize="16sp" />
 
 </RelativeLayout>
