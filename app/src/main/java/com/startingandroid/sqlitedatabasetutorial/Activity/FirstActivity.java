@@ -218,13 +218,13 @@ public class FirstActivity extends AppCompatActivity
     private void updateBookmarkStory()
     {
         dbHelper.updateBookmark(currentBook);
-        Toast.makeText(context, "Adds", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Added to Bookmarked Stories", Toast.LENGTH_SHORT).show();
     }
 
     private void addBookmarkStory()
     {
         dbHelper.addBookmark(currentBook);
-        Toast.makeText(context, "Adds", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Added to Bookmarked Stories", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -75,14 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.nav_login) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame, new LoginFragment()).commit();
+                    fragmentTransaction.replace(R.id.content_frame, new LoginFragment()).addToBackStack("HomeFragment").commit();
 
                 }
 
                 if (menuItem.getItemId() == R.id.about_us) {
 
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame, new AboutUs()).commit();
+                    fragmentTransaction.replace(R.id.content_frame, new AboutUs()).addToBackStack("HomeFragment").commit();
 
                 }
 
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.submit_a_story) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.content_frame, new SubmitStory()).commit();
+                    xfragmentTransaction.replace(R.id.content_frame, new SubmitStory()).addToBackStack("HomeFragment").commit();
                 }
 
                 if (menuItem.getItemId() == R.id.request_a_story) {

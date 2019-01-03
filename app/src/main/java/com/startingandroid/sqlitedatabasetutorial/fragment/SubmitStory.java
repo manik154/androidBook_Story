@@ -35,11 +35,13 @@ public class SubmitStory extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
-        //   getActivity().setTitle("Submit Your Story");
+
+        getActivity().setTitle("Submit Your Story");
+
         sme_applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
@@ -47,11 +49,10 @@ public class SubmitStory extends Fragment {
                 intent.setData(Uri.parse("mailto:manikrastogi479@gmail.com")); // or just "mailto:" for blank
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
                 startActivity(intent);
-                getActivity().finish();
+                editText.setText("");
+
             }
         });
-        editText.setText("");
-
     }
 
 }

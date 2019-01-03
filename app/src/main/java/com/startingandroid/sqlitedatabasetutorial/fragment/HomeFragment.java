@@ -120,7 +120,6 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("currentBook", book);
                 startActivity(intent);
 
-                Toast.makeText(getActivity(), "Bookmark is Selected", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.scrollTop:

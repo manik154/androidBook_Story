@@ -31,8 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/body_text_white"
-            android:gravity="top"
-            android:hint="Write Your Stories Here and Send it"
+            android:gravity="top|left"
+            android:fontFamily="@font/merriweather_ultrabold_italic"
+            android:hint="Write Your Stories and Send it Here "
             android:lines="20"
             android:padding="5dp" />
     </android.support.v7.widget.CardView>
@@ -43,6 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="submit"
+        android:background="@drawable/blue_button_bg"
+        android:fontFamily="@font/merriweather_bold_italic"
+        android:textColor="@color/body_text_white"
+        android:gravity="center"
         android:minHeight="45dp"
         android:textSize="16sp" />
 

@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.startingandroid.sqlitedatabasetutorial.Model.Book;
@@ -21,8 +22,8 @@ import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.Util.RecyclerTouchListener;
 import com.startingandroid.sqlitedatabasetutorial.adapters.BookAdapter;
 import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
-import com.startingandroid.sqlitedatabasetutorial.fragment.AboutUs;
 
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class BookmarkActivity extends AppCompatActivity {
     private GetBookDatabase dbHandler;
     protected String[] mDataset;
     private Toolbar toolbar;
+    private TextView textView;
 
 
     @Override
@@ -49,10 +51,19 @@ public class BookmarkActivity extends AppCompatActivity {
 
         final ArrayList<Book> books = dbHandler.getAllBookmarkedUsers();
         Log.d("Reading: ", "reading contacts.." + books.size());
+        if (books.size() == 0) {
+            textView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
 
-        adapter = new BookAdapter(BookmarkActivity.this, books);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+            recyclerView.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.GONE);
+
+            adapter = new BookAdapter(BookmarkActivity.this, books);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        }
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(BookmarkActivity.this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -93,7 +104,7 @@ public class BookmarkActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(BookmarkActivity.this);
         dbHandler = new GetBookDatabase(BookmarkActivity.this);
         recyclerView.setLayoutManager(layoutManager);
-
+        textView = findViewById(R.id.placeHolder);
     }
 
     @Override
@@ -124,8 +135,6 @@ public class BookmarkActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_share:
-
-                Toast.makeText(this, "Share is Selected", Toast.LENGTH_SHORT).show();
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
