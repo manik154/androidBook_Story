@@ -3,14 +3,16 @@ package com.startingandroid.sqlitedatabasetutorial.Activity;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
@@ -19,14 +21,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +36,9 @@ import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 
 import java.util.ArrayList;
 
-public class FirstActivity extends AppCompatActivity
-
-{
+public class FirstActivity extends AppCompatActivity {
     private static final String TAG = "FirstActivity";
     private Button button_prev, button_next;
-
     private TextView txtView;
     private FloatingActionButton floatingActionButton;
     private Book currentBook;
@@ -54,14 +50,18 @@ public class FirstActivity extends AppCompatActivity
     private RelativeLayout relativelayout;
     private ImageView imageView;
     GetBookDatabase dbHelper;
+    private CardView cardView;
     private Context context = FirstActivity.this;
     TextView content;
     private AppBarLayout appBarLayout;
     private String getName;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     Animation slideUp;
+    private CoordinatorLayout coordinatorLayout;
     Animation slideDown;
     private ArrayList<Book> books;
+    private boolean value = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,14 +166,38 @@ public class FirstActivity extends AppCompatActivity
         nestedScrollView = findViewById(R.id.scroll);
         floatingActionButton = findViewById(R.id.fab);
         txtView = (TextView) findViewById(R.id.title);
+        cardView = findViewById(R.id.direction_card_view);
         relativelayout = findViewById(R.id.relative);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.app_bar_layout);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         dbHelper = new GetBookDatabase(getApplicationContext());
         books = dbHelper.getAllBookmarkedUsers();
+        coordinatorLayout = findViewById(R.id.coordinator);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void changeTheme() {
+        imageView.setAlpha((float) 0.3);
+        appBarLayout.setBackgroundColor(Color.BLACK);
+        content.setTextColor(getResources().getColor(R.color.lightslategray_book_content_color2));
+        cardView.setCardBackgroundColor(Color.BLACK);
+        coordinatorLayout.setBackgroundColor(Color.BLACK);
+        txtView.setTextColor(getResources().getColor(R.color.lightslategray_book_content_color2));
+        txtView.setBackgroundColor(Color.BLACK);
+    }
+
+    private void callDefaultTheme() {
+
+        imageView.setAlpha((float) 1.0);
+        coordinatorLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        txtView.setBackgroundColor(Color.WHITE);
+        cardView.setCardBackgroundColor(Color.WHITE);
+        appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        content.setTextColor(getResources().getColor(R.color.lightslategray_book_content_color2));
+        txtView.setTextColor(getResources().getColor(R.color.title_color_book_detail_activity));
+
     }
 
     public void OnButtonClickListener() {
@@ -183,7 +207,13 @@ public class FirstActivity extends AppCompatActivity
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (value) {
+                    changeTheme();
+                    value = false;
+                } else {
+                    callDefaultTheme();
+                    value=true;
+                }
             }
         });
 
