@@ -12,12 +12,16 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -31,16 +35,19 @@ import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.Util.AppBarStateChangeListener;
 import com.startingandroid.sqlitedatabasetutorial.database.GetBookDatabase;
 
+import java.util.ArrayList;
+
 public class FirstActivity extends AppCompatActivity
 
 {
+    private static final String TAG = "FirstActivity";
     private Button button_prev, button_next;
 
     private TextView txtView;
     private FloatingActionButton floatingActionButton;
     private Book currentBook;
     private Toolbar toolbar;
-    int c=0;
+    int c = 0;
     private MenuItem item;
     private NestedScrollView nestedScrollView;
     private static final String SELECT_SQL = "SELECT *  FROM user";
@@ -52,6 +59,9 @@ public class FirstActivity extends AppCompatActivity
     private AppBarLayout appBarLayout;
     private String getName;
     private CollapsingToolbarLayout collapsingToolbarLayout;
+    Animation slideUp;
+    Animation slideDown;
+    private ArrayList<Book> books;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,8 @@ public class FirstActivity extends AppCompatActivity
         initalizeVariables();
 
         Intent intent = getIntent();
+        slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+        slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
 
         imageView = (ImageView) findViewById(R.id.posterPath);
         currentBook = (Book) intent.getSerializableExtra("currentBook");
@@ -69,6 +81,12 @@ public class FirstActivity extends AppCompatActivity
         if (currentBook != null) {
             setBookContent(currentBook);
         }
+        appBarLayout();
+        OnButtonClickListener();
+        callScrollView();
+    }
+
+    private void appBarLayout() {
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = true;
@@ -94,7 +112,6 @@ public class FirstActivity extends AppCompatActivity
 
                 if ((state.name()).equals("COLLAPSED")) {
                     floatingActionButton.hide();
-
                     imageView.setImageResource(0);
                     item.setVisible(true);
 
@@ -113,7 +130,34 @@ public class FirstActivity extends AppCompatActivity
                 }
             }
         });
-        OnButtonClickListener();
+    }
+
+    private void callScrollView() {
+        if (nestedScrollView != null) {
+
+            nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+
+                    if (scrollY > oldScrollY) {
+                        Log.i(TAG, "Scroll DOWN");
+                    }
+                    if (scrollY == 0) {
+                        Log.i(TAG, "TOP SCROLL");
+                    }
+                    if (scrollY < oldScrollY) {
+                        Log.i(TAG, "Scroll UP");
+                        relativelayout.setVisibility(View.GONE);
+                    }
+                    if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                        Log.i(TAG, "BOTTOM SCROLL");
+                        relativelayout.startAnimation(slideUp);
+                        relativelayout.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
 
     }
 
@@ -127,7 +171,7 @@ public class FirstActivity extends AppCompatActivity
         appBarLayout = findViewById(R.id.app_bar_layout);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         dbHelper = new GetBookDatabase(getApplicationContext());
-
+        books = dbHelper.getAllBookmarkedUsers();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -149,6 +193,7 @@ public class FirstActivity extends AppCompatActivity
             public void onClick(View v) {
                 button_next.setEnabled(true);
                 nestedScrollView.fullScroll(NestedScrollView.FOCUS_UP);
+                callScrollView();
                 Book book = dbHelper.getPreviousBook(currentBook.getId());
                 if (book != null) {
                     setBookContent(book);
@@ -164,6 +209,7 @@ public class FirstActivity extends AppCompatActivity
 
                 nestedScrollView.fullScroll(NestedScrollView.FOCUS_UP);
                 //button_prev.setEnabled(true);
+                callScrollView();
                 Book book = dbHelper.getNextBook(currentBook.getId());
                 if (book != null) {
                     setBookContent(book);
@@ -180,8 +226,8 @@ public class FirstActivity extends AppCompatActivity
         String getName = (String) currentBook.getName();
 
         txtView.setText(getName);
-        getSupportActionBar().setTitle(getName);
-        content.setText(currentBook.getContent());
+        Spanned sp = Html.fromHtml(currentBook.getContent());
+        content.setText(sp);
 
         Resources resources = context.getResources();
         final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
@@ -207,7 +253,6 @@ public class FirstActivity extends AppCompatActivity
 
             case R.id.menu_bookmark:
 
-
                 addBookmarkStory();
                 return true;
 
@@ -215,16 +260,17 @@ public class FirstActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void updateBookmarkStory()
-    {
+
+    private void updateBookmarkStory() {
         dbHelper.updateBookmark(currentBook);
         Toast.makeText(context, "Added to Bookmarked Stories", Toast.LENGTH_SHORT).show();
     }
 
-    private void addBookmarkStory()
-    {
+    private void addBookmarkStory() {
+
         dbHelper.addBookmark(currentBook);
         Toast.makeText(context, "Added to Bookmarked Stories", Toast.LENGTH_SHORT).show();
+
     }
 
 }

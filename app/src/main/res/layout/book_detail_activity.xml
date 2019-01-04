@@ -18,19 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:fitsSystemWindows="true"
+            android:theme="@style/ActionBar.ThemeOverlay"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@android:color/transparent"
-            app:collapsedTitleTextAppearance="@style/ActionBar.TitleText"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:theme="@style/ActionBar.ThemeOverlay"
-            app:popupTheme="@style/ActionBar.PopupThemeOverlay" >
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ActionBar.PopupThemeOverlay"/>
 
             <ImageView
                 android:id="@+id/posterPath"
@@ -49,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:clipToPadding="false"
+        android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,13 +56,12 @@
             android:id="@+id/direction_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             card_view:cardElevation="10dp"
             card_view:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -70,9 +69,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:fontFamily="@font/lato_bold_italic"
                     android:minHeight="40dp"
                     android:padding="8sp"
-                    android:fontFamily="@font/lato_bold_italic"
+
                     android:text="Title"
                     android:textAlignment="center"
                     android:textColor="#000000"
@@ -86,9 +86,9 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/merriweather_bold_italic"
                     android:text="content"
+                    android:layout_marginBottom="16dp"
                     android:textAlignment="viewStart"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -96,30 +96,35 @@
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:id="@+id/relative"
-        android:orientation="horizontal">
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/button_prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
             android:layout_alignParentStart="true"
-            android:background="@null"
+            android:background="@drawable/blue_button_bg"
+            android:fontFamily="@font/merriweather_bold_italic"
             android:text="prev"
-            android:textColor="#000000" />
+            android:textColor="@color/body_text_white" />
 
 
         <Button
             android:id="@+id/button_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:background="@null"
+            android:background="@drawable/blue_button_bg"
+            android:fontFamily="@font/merriweather_bold_italic"
             android:text="next"
-            android:textColor="#000000" />
+            android:textColor="@color/body_text_white" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
