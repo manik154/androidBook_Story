@@ -60,7 +60,8 @@ public class FirstActivity extends AppCompatActivity {
     private CoordinatorLayout coordinatorLayout;
     Animation slideDown;
     private ArrayList<Book> books;
-    private boolean value = true;
+    private boolean value = false;
+    private boolean value2 = false;
 
 
     @Override
@@ -115,8 +116,14 @@ public class FirstActivity extends AppCompatActivity {
                     imageView.setImageResource(0);
                     item.setVisible(true);
 
-                } else {
+                    if (value)
+                        floatingActionButton.setImageResource(R.drawable.night_icon);
+                    else {
+                        floatingActionButton.setImageResource(R.drawable.day_icon);
+                    }
 
+
+                } else {
                     Resources resources = context.getResources();
                     final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
                             context.getPackageName());
@@ -200,23 +207,31 @@ public class FirstActivity extends AppCompatActivity {
 
     }
 
+    private void onClickFloatingActionButton() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (value) {
+
+                    callDefaultTheme();
+                    floatingActionButton.setImageResource(R.drawable.night_icon);
+                    value = false;
+                } else {
+                    floatingActionButton.setImageResource(R.drawable.day_icon);
+                    changeTheme();
+                    value = true;
+
+                }
+            }
+        });
+    }
+
     public void OnButtonClickListener() {
         button_prev = (Button) findViewById(R.id.button_prev);
         button_next = (Button) findViewById(R.id.button_next);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (value) {
-                    changeTheme();
-                    value = false;
-                } else {
-                    callDefaultTheme();
-                    value=true;
-                }
-            }
-        });
-
+        onClickFloatingActionButton();
 
         button_prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,7 +300,14 @@ public class FirstActivity extends AppCompatActivity {
 
                 addBookmarkStory();
                 return true;
+            case R.id.night:
 
+                /*if (value)
+                    item.setIcon(R.drawable.night_icon);
+                else {
+                    item.setIcon(R.drawable.night_icon);
+                }*/
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
