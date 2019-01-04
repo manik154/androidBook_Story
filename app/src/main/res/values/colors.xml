@@ -6,11 +6,15 @@
 
     <color name="genre">#222222</color>
     <color name="book_content_color">#E6000000</color>
+    <color name="lightslategray_book_content_color2">#778899</color>
     <color name="black_opacity_color">#B3000000</color>
 
     <color name="body_text_white">#FFFFFFFF</color>
     <color name="BookBackgroundColor">#212121</color>
     <color name="BookTitleName">#ffffff</color>
+
+
     <color name="splash_background">#9999ff</color>
+    <color name="title_color_book_detail_activity">#000000</color>
 
 </resources>
