@@ -1,7 +1,6 @@
 package com.startingandroid.sqlitedatabasetutorial.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,12 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 import com.startingandroid.sqlitedatabasetutorial.R;
 import com.startingandroid.sqlitedatabasetutorial.Model.Book;
 
 import java.util.ArrayList;
-
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.UserViewHolder> {
     private ArrayList<Book> mDataSet;
@@ -44,7 +41,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.UserViewHolder
             int drawableResourceId = context.getResources().getIdentifier(mDataSet.get(position).getIcon(),
                     "drawable", context.getPackageName());
             Glide.with(context).load(drawableResourceId).into(holder.icon_entry);
-           /* Picasso.with(context).load(drawableResourceId).centerCrop()
+            /* Picasso.with(context).load(drawableResourceId).centerCrop()
                     .resize(holder.icon_entry.getWidth(), 500)
                     .into(holder.icon_entry);*/
  /*           Resources resources = context.getResources();

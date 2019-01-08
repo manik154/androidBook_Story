@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (menuItem.getItemId() == R.id.nav_login) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    Toast.makeText(context, "Coming Soon", Toast.LENGTH_SHORT).show();
+              /*      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content_frame, new LoginFragment()).addToBackStack("HomeFragment").commit();
-
+*/
                 }
 
                 if (menuItem.getItemId() == R.id.about_us) {
