@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class FirstActivity extends AppCompatActivity {
     private static final String TAG = "FirstActivity";
-    private Button button_prev, button_next;
+    private Button button_prev, button_next, button_bookmark;
     private TextView txtView;
     private FloatingActionButton floatingActionButton;
     private Book currentBook;
@@ -54,15 +54,13 @@ public class FirstActivity extends AppCompatActivity {
     private Context context = FirstActivity.this;
     TextView content;
     private AppBarLayout appBarLayout;
-    private String getName;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     Animation slideUp;
     private CoordinatorLayout coordinatorLayout;
     Animation slideDown;
     private ArrayList<Book> books;
     private boolean value = false;
-    private boolean value2 = false;
-
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,61 +80,9 @@ public class FirstActivity extends AppCompatActivity {
         if (currentBook != null) {
             setBookContent(currentBook);
         }
-        appBarLayout();
+
         OnButtonClickListener();
         callScrollView();
-    }
-
-    private void appBarLayout() {
-
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = true;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbarLayout.setTitle(getName);
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
-                    isShow = false;
-                }
-            }
-        });
-        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-
-                if ((state.name()).equals("COLLAPSED")) {
-                    floatingActionButton.hide();
-                    imageView.setImageResource(0);
-                    item.setVisible(true);
-
-                    if (value)
-                        floatingActionButton.setImageResource(R.drawable.night_icon);
-                    else {
-                        floatingActionButton.setImageResource(R.drawable.day_icon);
-                    }
-
-
-                } else {
-                    Resources resources = context.getResources();
-                    final int resourceId = resources.getIdentifier(currentBook.getIcon(), "drawable",
-                            context.getPackageName());
-                    imageView.setImageResource(resourceId);
-                    try {
-                        floatingActionButton.show();
-                        item.setVisible(false);
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        });
     }
 
     private void callScrollView() {
@@ -181,8 +127,6 @@ public class FirstActivity extends AppCompatActivity {
         dbHelper = new GetBookDatabase(getApplicationContext());
         books = dbHelper.getAllBookmarkedUsers();
         coordinatorLayout = findViewById(R.id.coordinator);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void changeTheme() {
@@ -230,8 +174,9 @@ public class FirstActivity extends AppCompatActivity {
     public void OnButtonClickListener() {
         button_prev = (Button) findViewById(R.id.button_prev);
         button_next = (Button) findViewById(R.id.button_next);
-
+        button_bookmark = findViewById(R.id.button_bookmark);
         onClickFloatingActionButton();
+
 
         button_prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,7 +192,6 @@ public class FirstActivity extends AppCompatActivity {
                 }
             }
         });
-
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +207,20 @@ public class FirstActivity extends AppCompatActivity {
                 }
             }
         });
+        button_bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (count == 0) {
+                    Toast.makeText(context, "Added to Bookmark Stories", Toast.LENGTH_SHORT).show();
+                    count++;
+                } else {
+                    count = 0;
+                    Toast.makeText(context, "Removed From Bookmark Stories", Toast.LENGTH_SHORT).show();
+                }
 
+
+            }
+        });
     }
 
     private void setBookContent(Book book) {
@@ -285,9 +242,6 @@ public class FirstActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_share, menu);
 
-        item = menu.findItem(R.id.night);
-        item.setVisible(false);
-
         return true;
     }
 
@@ -299,14 +253,6 @@ public class FirstActivity extends AppCompatActivity {
             case R.id.menu_bookmark:
 
                 addBookmarkStory();
-                return true;
-            case R.id.night:
-
-                /*if (value)
-                    item.setIcon(R.drawable.night_icon);
-                else {
-                    item.setIcon(R.drawable.night_icon);
-                }*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

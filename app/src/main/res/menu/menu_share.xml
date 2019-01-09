@@ -8,10 +8,6 @@
         android:icon="@drawable/bookmark"
         android:title="Bookmark"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/night"
-        android:icon="@drawable/night_icon"
-        android:title=""
-        app:showAsAction="always" />
+
 
 </menu>
